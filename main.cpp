@@ -12,27 +12,73 @@
 
 using namespace std;
 
-int main(){
-    int jour, mois, annee;
 
-    //vérfier si le mois est compris entre 1 et 12 
-    cout << "Entrez le mois : ";
+// fonction qui recupère une date valide 
+
+void getDate(int &jour, int &mois, int &annee)
+{
+    cout << "Entrez une date valide (jj/mm/aaaa) : ";
+    cin >> jour;
+    cin.ignore();
     cin >> mois;
-    while (mois < 1 || mois > 12){
-        cout << "Le mois doit être compris entre 1 et 12" << endl;
-        cout << "Entrez le mois : ";
-        cin >> mois;
+    cin.ignore();
+    cin >> annee;
+
+    // année bissextile
+    if (annee % 4 == 0 && annee % 100 != 0 || annee % 400 == 0)
+    {
+        if (mois == 2 && jour > 29)
+        {
+            cout << "Date invalide" << endl;
+            getDate(jour, mois, annee);
+        }
+    }
+    else
+    {
+        if (mois == 2 && jour > 28)
+        {
+            cout << "Date invalide" << endl;
+            getDate(jour, mois, annee);
+        }
     }
 
-    // verifier si le jour est compris entre 1 et 31
-    // cout << "Entrez le jour : ";
-    // cin >> jour;
-    // while (jour < 1 || jour > 31){
-    //     cout << "Entrez un jour valide : ";
-    //     cin >> jour;
-    // }
+    // mois de 30 jours
+    if (mois == 4 || mois == 6 || mois == 9 || mois == 11)
+    {
+        if (jour > 30)
+        {
+            cout << "Date invalide" << endl;
+            getDate(jour, mois, annee);
+        }
+    }
 
+    // mois de 31 jours
+    if (mois == 1 || mois == 3 || mois == 5 || mois == 7 || mois == 8 || mois == 10 || mois == 12)
+    {
+        if (jour > 31)
+        {
+            cout << "Date invalide" << endl;
+            getDate(jour, mois, annee);
+        }
+    }
 
-    // cout << "Entrez l'année : ";
-    // cin >> annee;
+    // mois invalide
+    if (mois > 12 || mois < 1)
+    {
+        cout << "Date invalide" << endl;
+        getDate(jour, mois, annee);
+    }
 }
+
+
+
+int main(int argc, char const *argv[])
+{
+    int jour, mois, annee;
+    getDate(jour, mois, annee);
+    return 0;
+}
+
+
+
+
