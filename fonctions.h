@@ -8,8 +8,7 @@ using namespace std;
 // fonction qui recupère une date valide 
 void getDate(int &jour, int &mois, int &annee)
 {
-    // entrer un date supérieur ou égale au 20/12/1582
-    cout << "Entrez une date valide (jj/mm/aaaa) supérieur ou égale au 20 décembre 1582 : ";
+    cout << "Entrez une date valide (jj/mm/aaaa) supérieur ou égale au 20 décembre 1582 : \n";
     cin >> jour;
     cin.ignore();
     cin >> mois;
@@ -62,6 +61,28 @@ void getDate(int &jour, int &mois, int &annee)
         getDate(jour, mois, annee);
     }
 
+    // date inférieure au 20 décembre 1582
+    if (annee < 1582)
+    {
+        cout << "Date invalide" << endl;
+        getDate(jour, mois, annee);
+    }
+    else if (annee == 1582)
+    {
+        if (mois < 12)
+        {
+            cout << "Date invalide" << endl;
+            getDate(jour, mois, annee);
+        }
+        else if (mois == 12)
+        {
+            if (jour < 20)
+            {
+                cout << "Date invalide" << endl;
+                getDate(jour, mois, annee);
+            }
+        }
+    }
 
 }
 
