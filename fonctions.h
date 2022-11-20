@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <fstream>
 
 using namespace std;
 
@@ -240,39 +240,106 @@ void option2(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
         nbre_mensuel(mois, annee, mensuel);
         nbre_quantieme(jour, quantieme);
         jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
-        affiche_jour_semaine(res);
+
+        if (res == 5)
+        {
+            cout << "Le 13 " << mois << " " << annee << " est un vendredi" << endl;
+        }
     }
 
-    // afficher le nombre de vendredi 13
+
 }
 
 
+// fonction 3 : edition de calendrier 
+void option3(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int &mensuel, int &quantieme, int &res){
+    // saisir une année
+    cout << "Saisir une année : ";
+    cin >> annee;
 
-// menu 
-void menu(){
-    int choix;
-    int jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res;
-    cout << "1. Jour de la semaine" << endl;
-    cout << "2. Vendredi 13" << endl;
-    cout << "3. Quitter" << endl;
-    cout << "Votre choix : " << endl;
-    cin >> choix;
-    switch (choix)
+    //convertir le res en jour de la semaine stocker dans un tableau
+    string jours[7] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+
+    //ecriture dans un fichier
+    ofstream fichier("calendrier.txt", ios::out | ios::trunc);  //déclaration du flux et ouverture du fichier
+
+    // si l'ouverture a réussi
+    if(fichier)
     {
-    case 1:
-        option1(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
-        break;
-    case 2:
-        option2(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
-        break;
-    case 3:
-        exit(0);
-        break;
-    default:
-        cout << "Choix invalide" << endl;
-        menu();
-        break;
+        // gerer les mois qui ont 31 jours, 30 jours, 28 ou 29 jours pour fevrier
+        for (int i = 1; i <= 12; i++)
+        {
+            mois = i;
+            if (mois == 1 || mois == 3 || mois == 5 || mois == 7 || mois == 8 || mois == 10 || mois == 12)
+            {
+                for (int j = 1; j <= 31; j++)
+                {
+                    jour = j;
+                    nbre_seculaire(jour, mois, annee, nbre_secu);
+                    nbre_annuel(jour, mois, annee, annuel);
+                    nbre_mensuel(mois, annee, mensuel);
+                    nbre_quantieme(jour, quantieme);
+                    jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+                    fichier << jour << "-" << mois << "-" << annee << " " << jours[res] << endl;
+                }
+            }
+            if (mois == 4 || mois == 6 || mois == 9 || mois == 11)
+            {
+                for (int j = 1; j <= 30; j++)
+                {
+                    jour = j;
+                    nbre_seculaire(jour, mois, annee, nbre_secu);
+                    nbre_annuel(jour, mois, annee, annuel);
+                    nbre_mensuel(mois, annee, mensuel);
+                    nbre_quantieme(jour, quantieme);
+                    jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+                    fichier << jour << "-" << mois << "-" << annee << " " << jours[res] << endl;
+                }
+            }
+            if (mois == 2)
+            {
+                if(annee % 4 == 0 && annee % 100 != 0 || annee % 400 == 0){
+                    for (int j = 1; j <= 29; j++)
+                    {
+                        jour = j;
+                        nbre_seculaire(jour, mois, annee, nbre_secu);
+                        nbre_annuel(jour, mois, annee, annuel);
+                        nbre_mensuel(mois, annee, mensuel);
+                        nbre_quantieme(jour, quantieme);
+                        jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+                        fichier << jour << "-" << mois << "-" << annee << " " << jours[res] << endl;
+                    }
+                }
+                else{
+                    for (int j = 1; j <= 28; j++)
+                    {
+                        jour = j;
+                        nbre_seculaire(jour, mois, annee, nbre_secu);
+                        nbre_annuel(jour, mois, annee, annuel);
+                        nbre_mensuel(mois, annee, mensuel);
+                        nbre_quantieme(jour, quantieme);
+                        jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+                        fichier << jour << "-" << mois << "-" << annee << " " << jours[res] << endl;
+                    }
+                }
+            }
+        }
+    
+        // on ferme le fichier
+        fichier.close();
     }
+    else  // sinon
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+        
+    
+
+        
+
 }
+
+
+
+
+
 
 

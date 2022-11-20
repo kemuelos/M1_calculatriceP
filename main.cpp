@@ -15,16 +15,34 @@ using namespace std;
 
 
 
-
-int main(int argc, char const *argv[])
-{
-    int jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res, date;
-    
-
-    
-    // option1(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
-    menu();    
-    return 0;
+int main(){
+    int choix;
+    int jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res, nbre, jour2, mois2, annee2;
+    cout << "1. Jour de la semaine" << endl;
+    cout << "2. Vendredi 13" << endl;
+    cout << "3. Edition de calendrier" << endl;
+    cout << "4. Quitter" << endl;
+    cout << "Votre choix : " << endl;
+    cin >> choix;
+    switch (choix)
+    {
+    case 1:
+        option1(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        break;
+    case 2:
+        option2(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        break;
+    case 3:
+        option3(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        break;
+    case 4:
+        exit(0);
+        break;
+    default:
+        cout << "Choix invalide" << endl;
+        main();
+        break;
+    }
 }
 
 
