@@ -184,6 +184,7 @@ void jour_semaine(int &nbre_secu, int &annuel, int &mensuel, int &quantieme, int
     res = (nbre_secu + annuel + mensuel + quantieme) % 7;
 }
 
+
 // fonction qui affiche le jour de la semaine
 void affiche_jour_semaine(int &res){
     if(res == 0){
@@ -208,3 +209,70 @@ void affiche_jour_semaine(int &res){
         cout << "Samedi" << endl;
     }
 }
+
+
+
+//fonction 1 : jour semaine
+void option1(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int &mensuel, int &quantieme, int &res){
+    getDate(jour, mois, annee);
+    nbre_seculaire(jour, mois, annee, nbre_secu);
+    nbre_annuel(jour, mois, annee, annuel);
+    nbre_mensuel(mois, annee, mensuel);
+    nbre_quantieme(jour, quantieme);
+    jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+    affiche_jour_semaine(res);
+}
+
+
+// fonction 2 : vendredi 13
+void option2(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int &mensuel, int &quantieme, int &res){
+    // saisir une année
+    cout << "Saisir une année : ";
+    cin >> annee;
+
+    // calculer le jour de la semaine pour tous les 13 du mois
+    for (int i = 1; i <= 12; i++)
+    {
+        mois = i;
+        jour = 13;
+        nbre_seculaire(jour, mois, annee, nbre_secu);
+        nbre_annuel(jour, mois, annee, annuel);
+        nbre_mensuel(mois, annee, mensuel);
+        nbre_quantieme(jour, quantieme);
+        jour_semaine(nbre_secu, annuel, mensuel, quantieme, res);
+        affiche_jour_semaine(res);
+    }
+
+    // afficher le nombre de vendredi 13
+}
+
+
+
+// menu 
+void menu(){
+    int choix;
+    int jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res;
+    cout << "1. Jour de la semaine" << endl;
+    cout << "2. Vendredi 13" << endl;
+    cout << "3. Quitter" << endl;
+    cout << "Votre choix : " << endl;
+    cin >> choix;
+    switch (choix)
+    {
+    case 1:
+        option1(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        break;
+    case 2:
+        option2(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        break;
+    case 3:
+        exit(0);
+        break;
+    default:
+        cout << "Choix invalide" << endl;
+        menu();
+        break;
+    }
+}
+
+
