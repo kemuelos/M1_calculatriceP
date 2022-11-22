@@ -244,8 +244,6 @@ void option2(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
             cout << "Le 13 " << mois << " " << annee << " est un vendredi" << endl;
         }
     }
-
-
 }
 
 
@@ -335,6 +333,8 @@ void option3(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
     }
     else  // sinon
         cerr << "Impossible d'ouvrir le fichier !" << endl;
+    
+    cout << "Calendrier généré avec succès" << endl;
 }
 
 

@@ -28,12 +28,15 @@ int main(){
     {
     case 1:
         option1(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        main();
         break;
     case 2:
         option2(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        main();
         break;
     case 3:
         option3(jour, mois, annee, nbre_secu, annuel, mensuel, quantieme, res);
+        main();
         break;
     case 4:
         exit(0);
