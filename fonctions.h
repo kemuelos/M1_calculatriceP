@@ -106,13 +106,6 @@ void nbre_seculaire(int &jour, int &mois, int &annee, int &nbre_secu){
         siecle_ref++;
     }
 
-    // printf("%d", s);
-    // printf("nbre_secu = %d", nbre_secu);
-
-    
-
-
-
 }
 
 
@@ -120,7 +113,6 @@ void nbre_seculaire(int &jour, int &mois, int &annee, int &nbre_secu){
 void nbre_annuel(int &jour, int &mois, int &annee, int &annuel){
      annuel = (annee%100) + (annee%100)/4 - 5;
     
-    // printf("annuel = %d", annuel);
 }
 
 
@@ -167,14 +159,12 @@ void nbre_mensuel(int &mois, int &annee,int &mensuel){
     if (mois == 8){
         mensuel = 6;
     }
-    // printf("mensuel = %d", mensuel);
 }
 
 
 // fonction qui calcule le quantième 
 void nbre_quantieme(int &jour, int &quantieme){
     quantieme = jour;
-    // printf("Le quantieme est : %d", quantieme);
 }
 
 
@@ -227,8 +217,16 @@ void option1(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
 // fonction 2 : vendredi 13
 void option2(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int &mensuel, int &quantieme, int &res){
     // saisir une année
-    cout << "Saisir une année : ";
+    cout << "Saisir une année supérieure à 1582 : ";
     cin >> annee;
+
+    // verifier si l'annee est supérieure à 1582
+    while(annee < 1582)
+    {
+        cout << "Date invalide" << endl;
+        cout << "Saisir une année supérieure à 1582 : ";
+        cin >> annee;
+    }
 
     // calculer le jour de la semaine pour tous les 13 du mois
     for (int i = 1; i <= 12; i++)
@@ -256,6 +254,13 @@ void option3(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
     // saisir une année
     cout << "Saisir une année : ";
     cin >> annee;
+
+    while(annee < 1582)
+    {
+        cout << "Date invalide" << endl;
+        cout << "Saisir une année supérieure à 1582 : ";
+        cin >> annee;
+    }
 
     //convertir le res en jour de la semaine stocker dans un tableau
     string jours[7] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
@@ -330,11 +335,6 @@ void option3(int &jour, int &mois, int &annee, int &nbre_secu, int &annuel, int 
     }
     else  // sinon
         cerr << "Impossible d'ouvrir le fichier !" << endl;
-        
-    
-
-        
-
 }
 
 
